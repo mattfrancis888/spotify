@@ -1,7 +1,8 @@
 import React from "react";
+import Body from "./Body";
 
 const App: React.FC<{}> = () => {
-    return <div>Hi</div>;
+    return <Body />;
 };
 
 export default App;
