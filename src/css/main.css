@@ -358,16 +358,68 @@ body {
   font: 1.1rem helvetica, arial, sans-serif;
 }
 
-.homeContianer {
-  position: fixed;
-  width: 100%;
+.homeContainer {
   height: 100%;
-  background-image: linear-gradient(90deg, #c074b2, #8ab5e8);
+  display: flex;
+  flex-direction: column;
+  background-image: linear-gradient(#2c5e92 0%, #552f6d 80%);
+  padding: 10rem 0;
+  text-align: center;
+  min-width: 40rem;
 }
 
-.homeBlackGradient {
-  position: absolute;
-  background-image: linear-gradient(transparent, #000);
+.titleWrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5rem;
+}
+
+.spotifyLogo {
+  width: 10rem;
+  height: 10rem;
+}
+
+.favoriteArtistTitle {
+  display: inline-block;
+  color: white;
+  font-size: 3.8rem;
+  margin-bottom: 3rem;
+}
+
+.favoriteArtistsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 1rem;
+}
+@media screen and (min-width: 992px) {
+  .favoriteArtistsContainer {
+    padding: 0 8rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .favoriteArtistsContainer {
+    padding: 0 19rem;
+  }
+}
+
+.artistCircle {
+  margin: 2rem;
+  flex-basis: 34%;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  overflow: hidden;
+}
+@media screen and (min-width: 768px) {
+  .artistCircle {
+    flex-basis: 24%;
+  }
+}
+.artistCircle img {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 1rem;
 }
 
 /*# sourceMappingURL=main.css.map */
