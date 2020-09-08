@@ -2,12 +2,20 @@ const express = require("express");
 const mongoose = require("mongoose");
 const keys = require("./config/keys");
 const app = express();
+let cors = require("cors");
+//CORS
+app.use(cors());
+
+//Connect to database
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
-console.log(mongoose.connection.readyState);
+
+app.use(cors());
 //Models
 require("./models/Artists");
 
 //Routes
 require("./routes/artistsRoutes")(app);
 
-app.listen(5000);
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT);
