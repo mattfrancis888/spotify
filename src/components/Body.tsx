@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { Artist, fetchArtists } from "../actions";
 import { StoreState } from "../reducers";
 import { cloudinaryCloudName } from "../keys";
+import Loading from "./Loading";
 
 interface BodyProps {
     // fetchFilms: Function;
@@ -18,7 +19,12 @@ const Body: React.FC<BodyProps> = (props) => {
     }, []);
 
     const renderArtists = (): JSX.Element | JSX.Element[] => {
-        if (props.artists.length === 0) return <div>Loading</div>;
+        if (props.artists.length === 0)
+            return (
+                <div className="loadingCenter">
+                    <Loading />
+                </div>
+            );
         else {
             console.log(props.artists);
             return props.artists.map((artist) => {
