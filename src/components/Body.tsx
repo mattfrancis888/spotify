@@ -19,7 +19,8 @@ const Body: React.FC<BodyProps> = (props) => {
 
     const renderArtists = (): JSX.Element | JSX.Element[] => {
         if (props.artists.length === 0) return <div>Loading</div>;
-        else
+        else {
+            console.log(props.artists);
             return props.artists.map((artist) => {
                 return (
                     <CloudinaryContext
@@ -34,6 +35,7 @@ const Body: React.FC<BodyProps> = (props) => {
                     </CloudinaryContext>
                 );
             });
+        }
     };
 
     return (

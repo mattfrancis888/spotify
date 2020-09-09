@@ -1,5 +1,6 @@
 import { ActionTypes } from "./types";
 import artists from "./axiosConfig";
+import axios from "axios";
 import { Dispatch } from "redux";
 
 export interface Artist {
@@ -16,8 +17,7 @@ export interface FetchArtistsAction {
 }
 
 export const fetchArtists = () => async (dispatch: Dispatch) => {
-    const response = await artists.get<Artist[]>("/");
-    console.log(response);
+    const response = await artists.get<Artist[]>("/artists");
     dispatch<FetchArtistsAction>({
         type: ActionTypes.FETCH_ARTISTS,
         payload: response.data,
