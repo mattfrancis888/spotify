@@ -6,7 +6,7 @@ const Routes: React.FC<{}> = () => {
     return (
         <Switch>
             <Route path="/" exact component={Body} />
-            <Route path="/thomasRhett" exact component={Artist} />
+            <Route path="/artist/:artistId" exact component={Artist} />
         </Switch>
     );
 };

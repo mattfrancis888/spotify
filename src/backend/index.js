@@ -12,9 +12,10 @@ mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
 
 //Models
 require("./models/Artists");
-
+require("./models/Songs");
 //Routes
 require("./routes/artistsRoutes")(app);
+require("./routes/songsRoutes")(app);
 
 const PORT = process.env.PORT || 5000;
 
