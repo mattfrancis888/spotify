@@ -1,12 +1,12 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Body from "./Body";
-import Artist from "./Artist";
+import ArtistInfo from "./ArtistInfo";
 const Routes: React.FC<{}> = () => {
     return (
         <Switch>
             <Route path="/" exact component={Body} />
-            <Route path="/artist/:artistId" exact component={Artist} />
+            <Route path="/artist/:artistId" exact component={ArtistInfo} />
         </Switch>
     );
 };

@@ -1,26 +1,43 @@
 import React, { useEffect } from "react";
 import thomasRhettSong from "../img/thomasRhettSong.jpg";
 import { connect } from "react-redux";
-import { ArtistSongs, fetchSongs } from "../actions";
+import { ArtistSongs, fetchSongs, fetchArtists, Artist } from "../actions";
 import { StoreState } from "../reducers";
 import Loading from "./Loading";
 import { cloudinaryCloudName } from "../keys";
 import { Image, CloudinaryContext } from "cloudinary-react";
 import { RouteComponentProps } from "react-router-dom";
 
-interface ArtistRouteParam {
+interface ArtistInfoRouteParam {
     artistId: string;
 }
-interface ArtistProps extends RouteComponentProps<ArtistRouteParam> {
+interface ArtistInfoProps extends RouteComponentProps<ArtistInfoRouteParam> {
     //RouteComponentProps is used to for Typescript's props.match.params
+
     fetchSongs(artistId: string): void;
     artistSongs: ArtistSongs[];
 }
 
-const Artist: React.FC<ArtistProps> = (props) => {
+const ArtistInfo: React.FC<ArtistInfoProps> = (props) => {
     useEffect(() => {
         props.fetchSongs(props.match.params.artistId);
     }, []);
+
+    // const renderBannerAndName = (): JSX.Element | JSX.Element[] => {
+    // if (props.artists.length === 0)
+    //     return (
+    //         <div className="loadingCenter">
+    //             <Loading />
+    //         </div>
+    //     );
+    // else
+    //     return (
+    //         <div className="bannerContainer">
+    //             <img src={thomasRhettSong} alt="artist's banner"></img>
+    //             <h1>Thomas Rhett</h1>
+    //         </div>
+    //     );
+    //  };
 
     const renderSongs = (): JSX.Element | JSX.Element[] => {
         if (props.artistSongs.length === 0)
@@ -30,18 +47,17 @@ const Artist: React.FC<ArtistProps> = (props) => {
                 </div>
             );
         else {
-            return props.artistSongs.map((artistSongs) => {
-                console.log(artistSongs);
+            return props.artistSongs[0].songs.map((song, index) => {
                 return (
                     <CloudinaryContext
                         cloudName={cloudinaryCloudName}
-                        key={artistSongs._id.toString()}
+                        key={index}
                         className="song"
                     >
                         <div className="songImageContainer">
-                            {/* <Image publicId={artistSongs.songs.pop()}></Image> */}
+                            <Image publicId={song.image}></Image>
                         </div>
-                        <h1>{}</h1>
+                        <h1>{song.title}</h1>
                     </CloudinaryContext>
                 );
             });
@@ -54,18 +70,10 @@ const Artist: React.FC<ArtistProps> = (props) => {
                 <img src={thomasRhettSong} alt="artist's banner"></img>
                 <h1>Thomas Rhett</h1>
             </div>
-
+            {/* {renderBannerAndName()} */}
             <div className="popularSongsContainer">
                 <h2 className="popularSongsTitle">Popular Songs</h2>
-                <div className="songsListWrap">
-                    {/* <div className="song">
-                        <div className="songImageContainer">
-                            <img src={thomasRhettSong} alt="song pic"></img>
-                        </div>
-                        <h1>Song 1</h1>
-                    </div> */}
-                    {renderSongs()}
-                </div>
+                <div className="songsListWrap">{renderSongs()}</div>
             </div>
         </div>
     );
@@ -74,6 +82,7 @@ const Artist: React.FC<ArtistProps> = (props) => {
 const mapStateToProps = (state: StoreState) => {
     return {
         artistSongs: state.artistSongs,
+        artists: state.artists,
     };
 };
-export default connect(mapStateToProps, { fetchSongs })(Artist);
+export default connect(mapStateToProps, { fetchSongs })(ArtistInfo);
