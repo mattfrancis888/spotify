@@ -6,14 +6,16 @@ import { Artist, fetchArtists } from "../actions";
 import { StoreState } from "../reducers";
 import { cloudinaryCloudName } from "../keys";
 import Loading from "./Loading";
+import { useHistory } from "react-router-dom";
 
 interface BodyProps {
-    // fetchFilms: Function;
     fetchArtists(): void;
     artists: Artist[];
 }
 
 const Body: React.FC<BodyProps> = (props) => {
+    const history = useHistory();
+
     useEffect(() => {
         props.fetchArtists();
     }, []);
@@ -26,18 +28,17 @@ const Body: React.FC<BodyProps> = (props) => {
                 </div>
             );
         else {
-            console.log(props.artists);
             return props.artists.map((artist) => {
                 return (
                     <CloudinaryContext
                         cloudName={cloudinaryCloudName}
                         key={artist._id.toString()}
                         className="artistCircle"
+                        onClick={() =>
+                            history.push(`artist/${artist._id.toString()}`)
+                        }
                     >
-                        <Image
-                            className="filmImage"
-                            publicId={artist.image}
-                        ></Image>
+                        <Image publicId={artist.image}></Image>
                     </CloudinaryContext>
                 );
             });

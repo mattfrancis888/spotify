@@ -4,11 +4,11 @@ import axios from "axios";
 import { Dispatch } from "redux";
 
 export interface Artist {
-    _id: Number;
-    firstName: String;
-    lastName: String;
-    image: String;
-    hearts: Number;
+    _id: string;
+    firstName: string;
+    lastName: string;
+    image: string;
+    hearts: number;
 }
 
 export interface FetchArtistsAction {
