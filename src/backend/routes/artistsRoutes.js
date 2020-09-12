@@ -7,4 +7,8 @@ module.exports = (app) => {
         const artists = await Artists.find({});
         res.send(artists);
     });
+    app.get("/artists/:artistId", async (req, res) => {
+        const artist = await Artists.find({ _id: req.params.artistId });
+        res.send(artist);
+    });
 };

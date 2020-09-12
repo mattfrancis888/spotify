@@ -5,6 +5,7 @@ const artistSchema = new Schema({
     fistName: String,
     lastName: String,
     image: String,
+    backgroundImage: String,
     hearts: Number,
 });
 
