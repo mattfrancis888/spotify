@@ -25,6 +25,15 @@ const ArtistInfo: React.FC<ArtistInfoProps> = (props) => {
         props.fetchSongs(props.match.params.artistId);
     }, []);
 
+    const renderHeader = (): JSX.Element => {
+        if (props.artists.length === 0) return <Header artistName="" />;
+        else
+            return (
+                <Header
+                    artistName={`${props.artists[0].firstName} ${props.artists[0].lastName}`}
+                />
+            );
+    };
     const renderBannerAndName = (): JSX.Element | JSX.Element[] => {
         if (props.artists.length === 0)
             return (
@@ -72,7 +81,7 @@ const ArtistInfo: React.FC<ArtistInfoProps> = (props) => {
 
     return (
         <React.Fragment>
-            <Header />
+            {renderHeader()}
             <div className="artistContainer">
                 {renderBannerAndName()}
                 <div className="popularSongsContainer">

@@ -8,6 +8,7 @@ nav {
     z-index: 1;
 }
 .spotifyLogoContainer {
+    cursor: pointer;
     width: 3rem;
     height: 3rem;
     img {
@@ -21,9 +22,16 @@ nav {
         margin-right: 2rem;
     }
 }
-.artistNameOnScroll {
-    color: white;
+
+.artistNameHide {
     margin: 0;
+    transition: opacity 0.5s;
+    opacity: 0;
+}
+.artistNameOnScroll {
+    margin: 0;
+    opacity: 1;
+    color: white;
     font-size: 2.2rem;
     @media screen and (min-width: $md_breakpoint) {
         font-size: 2.8rem;
