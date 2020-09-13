@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import thomasRhettSong from "../img/thomasRhettSong.jpg";
 import { connect } from "react-redux";
 import { ArtistSongs, fetchSongs, fetchArtist, Artist } from "../actions";
 import { StoreState } from "../reducers";
@@ -7,6 +6,7 @@ import Loading from "./Loading";
 import { cloudinaryCloudName } from "../keys";
 import { Image, CloudinaryContext } from "cloudinary-react";
 import { RouteComponentProps } from "react-router-dom";
+import Header from "./Header";
 
 interface ArtistInfoRouteParam {
     artistId: string;
@@ -71,13 +71,16 @@ const ArtistInfo: React.FC<ArtistInfoProps> = (props) => {
     };
 
     return (
-        <div className="artistContainer">
-            {renderBannerAndName()}
-            <div className="popularSongsContainer">
-                <h2 className="popularSongsTitle">Popular Songs</h2>
-                <div className="songsListWrap">{renderSongs()}</div>
+        <React.Fragment>
+            <Header />
+            <div className="artistContainer">
+                {renderBannerAndName()}
+                <div className="popularSongsContainer">
+                    <h2 className="popularSongsTitle">Popular Songs</h2>
+                    <div className="songsListWrap">{renderSongs()}</div>
+                </div>
             </div>
-        </div>
+        </React.Fragment>
     );
 };
 
