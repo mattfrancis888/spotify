@@ -362,6 +362,21 @@ body {
   margin: auto;
 }
 
+.circlePlaceHolderContainer {
+  background-color: black;
+  height: 12rem;
+}
+@media screen and (min-width: 520px) {
+  .circlePlaceHolderContainer {
+    height: 18rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .circlePlaceHolderContainer {
+    height: 20rem;
+  }
+}
+
 .homeContainer {
   height: 100%;
   min-height: 100vh;
@@ -371,7 +386,6 @@ body {
   padding: 10rem 0;
   text-align: center;
   min-width: 40rem;
-  overflow-x: hidden;
 }
 
 .titleWrap {
@@ -381,15 +395,26 @@ body {
 }
 
 .spotifyLogo {
-  width: 10rem;
-  height: 10rem;
+  width: 8rem;
+  height: 8rem;
+}
+@media screen and (min-width: 520px) {
+  .spotifyLogo {
+    width: 10rem;
+    height: 10rem;
+  }
 }
 
 .favoriteArtistTitle {
   display: inline-block;
   color: white;
-  font-size: 3.8rem;
+  font-size: 3rem;
   margin-bottom: 3rem;
+}
+@media screen and (min-width: 520px) {
+  .favoriteArtistTitle {
+    font-size: 3.8rem;
+  }
 }
 
 .favoriteArtistsContainer {

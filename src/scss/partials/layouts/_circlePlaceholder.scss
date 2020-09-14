@@ -1,0 +1,10 @@
+.circlePlaceHolderContainer {
+    background-color: black;
+    height: 12rem;
+    @media screen and (min-width: $sm_breakpoint) {
+        height: 18rem;
+    }
+    @media screen and (min-width: $xl_breakpoint) {
+        height: 20rem;
+    }
+}

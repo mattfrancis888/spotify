@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import spotify from "../img/spotify.png";
 import { Image, CloudinaryContext } from "cloudinary-react";
 import { connect } from "react-redux";
@@ -7,6 +7,7 @@ import { StoreState } from "../reducers";
 import { cloudinaryCloudName } from "../keys";
 import Loading from "./Loading";
 import { useHistory } from "react-router-dom";
+import CirclePlaceholder from "./CirclePlaceholder";
 
 interface BodyProps {
     fetchArtists(): void;
@@ -14,6 +15,8 @@ interface BodyProps {
 }
 
 const Body: React.FC<BodyProps> = (props) => {
+    const [isImageLoaded, setIsImageLoaded] = useState(false);
+
     const history = useHistory();
 
     useEffect(() => {
@@ -38,7 +41,18 @@ const Body: React.FC<BodyProps> = (props) => {
                             history.push(`artist/${artist._id.toString()}`)
                         }
                     >
-                        <Image publicId={artist.image}></Image>
+                        {!isImageLoaded && <CirclePlaceholder />}
+                        <Image
+                            style={
+                                !isImageLoaded
+                                    ? { display: "none" }
+                                    : { display: "block" }
+                            }
+                            publicId={artist.image}
+                            onLoad={() => {
+                                setIsImageLoaded(true);
+                            }}
+                        ></Image>
                     </CloudinaryContext>
                 );
             });
