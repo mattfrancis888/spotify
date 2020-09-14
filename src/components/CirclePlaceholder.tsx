@@ -3,7 +3,7 @@ import React from "react";
 import ContentLoader from "react-content-loader";
 import lightGrey from "../img/lightGrey.png";
 
-const CirclePlaceholder: React.FC<{}> = (props) => {
+const CirclePlaceholder: React.FC<{}> = () => {
     return <img src={lightGrey} alt="placeHolderImg"></img>;
     // return <div className="circlePlaceHolderContainer"></div>;
 };

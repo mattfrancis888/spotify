@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { ArtistSongs, fetchSongs, fetchArtist, Artist } from "../actions";
 import { StoreState } from "../reducers";
@@ -7,6 +7,8 @@ import { cloudinaryCloudName } from "../keys";
 import { Image, CloudinaryContext } from "cloudinary-react";
 import { RouteComponentProps } from "react-router-dom";
 import Header from "./Header";
+import SongsPlaceholder from "./SongsPlaceholder";
+import FadeIn from "react-fade-in";
 
 interface ArtistInfoRouteParam {
     artistId: string;
@@ -20,6 +22,9 @@ interface ArtistInfoProps extends RouteComponentProps<ArtistInfoRouteParam> {
 }
 
 const ArtistInfo: React.FC<ArtistInfoProps> = (props) => {
+    const [isBannerImageLoaded, setIsBannerImageLoaded] = useState(false);
+    const [isSongsImageLoaded, setIsSongsImageLoaded] = useState(false);
+
     useEffect(() => {
         props.fetchArtist(props.match.params.artistId);
         props.fetchSongs(props.match.params.artistId);
@@ -46,8 +51,19 @@ const ArtistInfo: React.FC<ArtistInfoProps> = (props) => {
             return (
                 <div className="bannerContainer">
                     <img
+                        style={
+                            !isBannerImageLoaded
+                                ? { opacity: "0" }
+                                : { opacity: "1" }
+                        }
                         src={props.artists[0].backgroundImage}
                         alt="artist's banner"
+                        onLoad={() => {
+                            setTimeout(
+                                () => setIsBannerImageLoaded(true),
+                                1000
+                            );
+                        }}
                     ></img>
                     <h1>{`${props.artists[0].firstName} ${props.artists[0].lastName}`}</h1>
                 </div>
@@ -86,7 +102,24 @@ const ArtistInfo: React.FC<ArtistInfoProps> = (props) => {
                 {renderBannerAndName()}
                 <div className="popularSongsContainer">
                     <h2 className="popularSongsTitle">Popular Songs</h2>
-                    <div className="songsListWrap">{renderSongs()}</div>
+                    {!isSongsImageLoaded && (
+                        <FadeIn>
+                            <SongsPlaceholder />
+                        </FadeIn>
+                    )}
+                    <div
+                        className="songsListWrap"
+                        style={
+                            !isSongsImageLoaded
+                                ? { display: "none" }
+                                : { display: "block" }
+                        }
+                        onLoad={() => {
+                            setTimeout(() => setIsSongsImageLoaded(true), 1000);
+                        }}
+                    >
+                        {renderSongs()}
+                    </div>
                 </div>
             </div>
         </React.Fragment>

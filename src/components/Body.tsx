@@ -50,7 +50,7 @@ const Body: React.FC<BodyProps> = (props) => {
                             }
                             publicId={artist.image}
                             onLoad={() => {
-                                setIsImageLoaded(true);
+                                setTimeout(() => setIsImageLoaded(true));
                             }}
                         ></Image>
                     </CloudinaryContext>
