@@ -10,7 +10,7 @@
 .bannerContainer {
     position: relative;
     width: 100%;
-    min-width: 80rem;
+    min-width: 37rem;
     height: 30rem;
     img {
         width: 100%;
@@ -18,7 +18,7 @@
         object-fit: cover;
         transition: opacity 0.5s;
     }
-    h1 {
+    .artistFullName {
         position: absolute;
         left: 2rem;
         bottom: 3.5rem;
@@ -35,6 +35,17 @@
         }
     }
     margin-bottom: 2rem;
+    .heartsIcon {
+        margin-right: 0.8rem;
+    }
+    .heartsTitle {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        right: 6rem;
+        bottom: -1rem;
+        font-size: 2.5rem;
+    }
 }
 
 .popularSongsContainer {

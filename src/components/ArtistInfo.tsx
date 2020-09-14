@@ -9,7 +9,8 @@ import { RouteComponentProps } from "react-router-dom";
 import Header from "./Header";
 import SongsPlaceholder from "./SongsPlaceholder";
 import FadeIn from "react-fade-in";
-
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { IconContext } from "react-icons";
 interface ArtistInfoRouteParam {
     artistId: string;
 }
@@ -65,7 +66,13 @@ const ArtistInfo: React.FC<ArtistInfoProps> = (props) => {
                             );
                         }}
                     ></img>
-                    <h1>{`${props.artists[0].firstName} ${props.artists[0].lastName}`}</h1>
+                    <h1 className="artistFullName">{`${props.artists[0].firstName} ${props.artists[0].lastName}`}</h1>
+                    <IconContext.Provider value={{ className: "heartsIcon" }}>
+                        <h1 className="heartsTitle">
+                            <AiOutlineHeart />
+                            {props.artists[0].hearts}
+                        </h1>
+                    </IconContext.Provider>
                 </div>
             );
     };
