@@ -4,6 +4,13 @@ const keys = require("./config/keys");
 const app = express();
 
 let cors = require("cors");
+const bodyParser = require("body-parser");
+//  middleware for parsing json objects - eg; used to return JSON after POST request
+app.use(bodyParser.json());
+
+// middleware for parsing bodies from URL
+app.use(bodyParser.urlencoded({ extended: true }));
+
 //CORS
 app.use(cors());
 

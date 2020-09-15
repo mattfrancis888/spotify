@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { ArtistSongs, fetchSongs, fetchArtist, Artist } from "../actions";
+import {
+    ArtistSongs,
+    fetchSongs,
+    fetchArtist,
+    updateHearts,
+    Artist,
+    Hearts,
+} from "../actions";
 import { StoreState } from "../reducers";
 import Loading from "./Loading";
 import { cloudinaryCloudName } from "../keys";
@@ -18,6 +25,7 @@ interface ArtistInfoProps extends RouteComponentProps<ArtistInfoRouteParam> {
     //RouteComponentProps is used to for Typescript's props.match.params
     fetchArtist(artistId: string): void;
     fetchSongs(artistId: string): void;
+    updateHearts(artistId: string, hearts: Hearts): void;
     artists: Artist[];
     artistSongs: ArtistSongs[];
 }
@@ -29,6 +37,7 @@ const ArtistInfo: React.FC<ArtistInfoProps> = (props) => {
     useEffect(() => {
         props.fetchArtist(props.match.params.artistId);
         props.fetchSongs(props.match.params.artistId);
+        props.updateHearts(props.match.params.artistId, { hearts: 1 });
     }, []);
 
     const renderHeader = (): JSX.Element => {
@@ -139,6 +148,8 @@ const mapStateToProps = (state: StoreState) => {
         artists: state.artists,
     };
 };
-export default connect(mapStateToProps, { fetchArtist, fetchSongs })(
-    ArtistInfo
-);
+export default connect(mapStateToProps, {
+    fetchArtist,
+    fetchSongs,
+    updateHearts,
+})(ArtistInfo);

@@ -5,6 +5,7 @@ export default (state: Artist[] = [], action: Actions) => {
             return action.payload;
         case ActionTypes.FETCH_ARTIST:
             return action.payload;
+
         default:
             return state;
     }
