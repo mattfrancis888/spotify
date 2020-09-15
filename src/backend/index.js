@@ -5,7 +5,7 @@ const app = express();
 
 let cors = require("cors");
 const bodyParser = require("body-parser");
-//  middleware for parsing json objects - eg; used to return JSON after POST request
+//  middleware for parsing json objects - eg; able to acess req.body
 app.use(bodyParser.json());
 
 // middleware for parsing bodies from URL

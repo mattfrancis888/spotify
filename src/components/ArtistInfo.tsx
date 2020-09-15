@@ -33,12 +33,19 @@ interface ArtistInfoProps extends RouteComponentProps<ArtistInfoRouteParam> {
 const ArtistInfo: React.FC<ArtistInfoProps> = (props) => {
     const [isBannerImageLoaded, setIsBannerImageLoaded] = useState(false);
     const [isSongsImageLoaded, setIsSongsImageLoaded] = useState(false);
-
+    const [showHeartOutline, setHeartImage] = useState(true);
+    const DEFAULT_AMOUNT_OF_HEARTS = -999;
+    const [amountOfHearts, setAmountOfHearts] = useState(
+        DEFAULT_AMOUNT_OF_HEARTS
+    );
     useEffect(() => {
         props.fetchArtist(props.match.params.artistId);
         props.fetchSongs(props.match.params.artistId);
-        props.updateHearts(props.match.params.artistId, { hearts: 1 });
     }, []);
+
+    useEffect(() => {
+        console.log(amountOfHearts);
+    }, [amountOfHearts]);
 
     const renderHeader = (): JSX.Element => {
         if (props.artists.length === 0) return <Header artistName="" />;
@@ -57,7 +64,13 @@ const ArtistInfo: React.FC<ArtistInfoProps> = (props) => {
                 // </div>
                 <React.Fragment></React.Fragment>
             );
-        else
+        else {
+            //NOTE: to avoid multiple calls
+            //just to update the # of hearts (via calling props.fetchArtists()
+            //each time the heart is clicked;
+            //I chose the method where props.artists[0].heart
+            //will always be the same by only calling props.fetchArtist() on componentDidMount();
+            //instead of componentDidUpdate()
             return (
                 <div className="bannerContainer">
                     <img
@@ -78,12 +91,46 @@ const ArtistInfo: React.FC<ArtistInfoProps> = (props) => {
                     <h1 className="artistFullName">{`${props.artists[0].firstName} ${props.artists[0].lastName}`}</h1>
                     <IconContext.Provider value={{ className: "heartsIcon" }}>
                         <h1 className="heartsTitle">
-                            <AiOutlineHeart />
-                            {props.artists[0].hearts}
+                            {showHeartOutline ? (
+                                <AiOutlineHeart
+                                    onClick={() => {
+                                        setHeartImage(!showHeartOutline);
+                                        setAmountOfHearts(
+                                            props.artists[0].hearts + 1
+                                        );
+                                        props.updateHearts(
+                                            props.match.params.artistId,
+                                            {
+                                                hearts:
+                                                    props.artists[0].hearts + 1,
+                                            }
+                                        );
+                                    }}
+                                />
+                            ) : (
+                                <AiFillHeart
+                                    onClick={() => {
+                                        setHeartImage(!showHeartOutline);
+                                        setAmountOfHearts(
+                                            props.artists[0].hearts
+                                        );
+                                        props.updateHearts(
+                                            props.match.params.artistId,
+                                            {
+                                                hearts: props.artists[0].hearts,
+                                            }
+                                        );
+                                    }}
+                                />
+                            )}
+                            {amountOfHearts === DEFAULT_AMOUNT_OF_HEARTS
+                                ? props.artists[0].hearts
+                                : amountOfHearts}
                         </h1>
                     </IconContext.Provider>
                 </div>
             );
+        }
     };
 
     const renderSongs = (): JSX.Element | JSX.Element[] => {

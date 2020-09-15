@@ -16,13 +16,14 @@ module.exports = (app) => {
     });
     app.patch("/artists/:artistId/hearts", async (req, res) => {
         try {
-            const artist = await Artists.find({ _id: req.params.artistId });
-            console.log(req.body);
+            const artist = await Artists.findOne({ _id: req.params.artistId });
+            // console.log(req.body);
 
             if (req.body.hearts) {
                 artist.hearts = req.body.hearts;
             }
-            // await artist.save();
+            // console.log(artist.hearts);
+            await artist.save();
             res.send(artist);
         } catch {
             res.status(404);
