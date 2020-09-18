@@ -162,7 +162,7 @@ const ArtistInfo: React.FC<ArtistInfoProps> = (props) => {
     return (
         <React.Fragment>
             {renderHeader()}
-            <div className="artistContainer">
+            <div data-testid="artistContent" className="artistContainer">
                 {renderBannerAndName()}
                 <div className="popularSongsContainer">
                     <h2 className="popularSongsTitle">Popular Songs</h2>
