@@ -1,6 +1,9 @@
-const express = require("express");
+import express from "express";
+import { keys } from "./config/keys";
+import artistsRoutes from "./routes/artistsRoutes";
+import songsRoutes from "./routes/songsRoutes";
 const mongoose = require("mongoose");
-const keys = require("./config/keys");
+// const keys = require("./config/keys");
 const app = express();
 
 let cors = require("cors");
@@ -21,8 +24,10 @@ mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
 require("./models/Artists");
 require("./models/Songs");
 //Routes
-require("./routes/artistsRoutes")(app);
-require("./routes/songsRoutes")(app);
+app.use("/artists", artistsRoutes);
+app.use("/songs", songsRoutes);
+//require("./routes/artistsRoutes")(app);
+// require("./routes/songsRoutes")(app);
 
 const PORT = process.env.PORT || 5000;
 
