@@ -18,6 +18,7 @@ import SongsPlaceholder from "./SongsPlaceholder";
 import FadeIn from "react-fade-in";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { IconContext } from "react-icons";
+
 interface ArtistInfoRouteParam {
     artistId: string;
 }

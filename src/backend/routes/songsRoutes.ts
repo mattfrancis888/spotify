@@ -2,7 +2,7 @@ import { Router, Request, Response } from "express";
 import Songs from "../models/Songs";
 
 const router = Router();
-router.get("/songs/:artistId", async (req: Request, res: Response) => {
+router.get("/:artistId", async (req: Request, res: Response) => {
     const songs = await Songs.find({ _artist: req.params.artistId });
     res.send(songs);
 });

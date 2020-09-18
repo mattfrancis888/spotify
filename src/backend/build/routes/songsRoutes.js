@@ -42,7 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
 var Songs_1 = __importDefault(require("../models/Songs"));
 var router = express_1.Router();
-router.get("/songs/:artistId", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+router.get("/:artistId", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var songs;
     return __generator(this, function (_a) {
         switch (_a.label) {
