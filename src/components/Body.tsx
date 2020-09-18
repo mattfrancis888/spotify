@@ -34,6 +34,7 @@ const Body: React.FC<BodyProps> = (props) => {
             return props.artists.map((artist) => {
                 return (
                     <CloudinaryContext
+                        data-testid="artist"
                         cloudName={cloudinaryCloudName}
                         key={artist._id.toString()}
                         className="artistCircle"
