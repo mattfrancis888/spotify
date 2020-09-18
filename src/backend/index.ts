@@ -1,9 +1,19 @@
-const express = require("express");
+import express from "express";
+import { keys } from "./config/keys";
+import artistsRoutes from "./routes/artistsRoutes";
+import songsRoutes from "./routes/songsRoutes";
 const mongoose = require("mongoose");
-const keys = require("./config/keys");
+// const keys = require("./config/keys");
 const app = express();
 
 let cors = require("cors");
+const bodyParser = require("body-parser");
+//  middleware for parsing json objects - eg; able to acess req.body
+app.use(bodyParser.json());
+
+// middleware for parsing bodies from URL
+app.use(bodyParser.urlencoded({ extended: true }));
+
 //CORS
 app.use(cors());
 
@@ -12,9 +22,12 @@ mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
 
 //Models
 require("./models/Artists");
-
+require("./models/Songs");
 //Routes
-require("./routes/artistsRoutes")(app);
+app.use("/artists", artistsRoutes);
+app.use("/songs", songsRoutes);
+//require("./routes/artistsRoutes")(app);
+// require("./routes/songsRoutes")(app);
 
 const PORT = process.env.PORT || 5000;
 

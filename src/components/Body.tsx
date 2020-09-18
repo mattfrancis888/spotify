@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import spotify from "../img/spotify.png";
 import { Image, CloudinaryContext } from "cloudinary-react";
 import { connect } from "react-redux";
@@ -6,14 +6,19 @@ import { Artist, fetchArtists } from "../actions";
 import { StoreState } from "../reducers";
 import { cloudinaryCloudName } from "../keys";
 import Loading from "./Loading";
+import { useHistory } from "react-router-dom";
+import CirclePlaceholder from "./CirclePlaceholder";
 
 interface BodyProps {
-    // fetchFilms: Function;
     fetchArtists(): void;
     artists: Artist[];
 }
 
 const Body: React.FC<BodyProps> = (props) => {
+    const [isImageLoaded, setIsImageLoaded] = useState(false);
+
+    const history = useHistory();
+
     useEffect(() => {
         props.fetchArtists();
     }, []);
@@ -26,17 +31,27 @@ const Body: React.FC<BodyProps> = (props) => {
                 </div>
             );
         else {
-            console.log(props.artists);
             return props.artists.map((artist) => {
                 return (
                     <CloudinaryContext
                         cloudName={cloudinaryCloudName}
                         key={artist._id.toString()}
                         className="artistCircle"
+                        onClick={() =>
+                            history.push(`artist/${artist._id.toString()}`)
+                        }
                     >
+                        {!isImageLoaded && <CirclePlaceholder />}
                         <Image
-                            className="filmImage"
+                            style={
+                                !isImageLoaded
+                                    ? { display: "none" }
+                                    : { display: "block" }
+                            }
                             publicId={artist.image}
+                            onLoad={() => {
+                                setTimeout(() => setIsImageLoaded(true));
+                            }}
                         ></Image>
                     </CloudinaryContext>
                 );
