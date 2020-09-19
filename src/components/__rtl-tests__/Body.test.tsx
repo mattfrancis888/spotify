@@ -2,14 +2,9 @@ import Root from "Root";
 import React from "react";
 import Body from "components/Body";
 import "@testing-library/jest-dom/extend-expect";
-import {
-    render,
-    cleanup,
-    RenderResult,
-    getByText,
-} from "@testing-library/react";
+import { render, cleanup, RenderResult } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
-//import { FetchReviewsResponse } from "actions";
+
 import nock from "nock";
 import waitForExpect from "wait-for-expect";
 
@@ -25,7 +20,7 @@ beforeEach(async () => {
     });
 });
 
-it("ComponentDidMount() fetches data and fills up DOM with Favorite Artists>", async () => {
+test("ComponentDidMount() fetches data and fills up DOM with Favorite Artists", async () => {
     const mockData = [
         {
             _id: "1",
@@ -48,6 +43,7 @@ it("ComponentDidMount() fetches data and fills up DOM with Favorite Artists>", a
             hearts: 1,
         },
     ];
+    //NOTE TO ME: REDUX FORM NOW WORKS WITH NOCK!
     const scope = nock("http://localhost:5000/")
         .get("/artists")
         .reply(200, mockData, { "Access-Control-Allow-Origin": "*" });

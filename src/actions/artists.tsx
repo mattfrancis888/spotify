@@ -40,7 +40,7 @@ export const fetchArtists = () => async (dispatch: Dispatch) => {
 };
 
 export const fetchArtist = (artistId: string) => async (dispatch: Dispatch) => {
-    const response = await artists.get<Artist[]>(`artists/${artistId}`);
+    const response = await artists.get<Artist[]>(`/artists/${artistId}`);
     dispatch<FetchArtistAction>({
         type: ActionTypes.FETCH_ARTIST,
         payload: response.data,
@@ -51,7 +51,7 @@ export const updateHearts = (artistId: string, hearts: Hearts) => async (
     dispatch: Dispatch
 ) => {
     const response = await artists.patch<Hearts[]>(
-        `artists/${artistId}/hearts`,
+        `/artists/${artistId}/hearts`,
         hearts
     );
     dispatch<UpdateHeartsAction>({

@@ -44,10 +44,6 @@ const ArtistInfo: React.FC<ArtistInfoProps> = (props) => {
         props.fetchSongs(props.match.params.artistId);
     }, []);
 
-    useEffect(() => {
-        console.log(amountOfHearts);
-    }, [amountOfHearts]);
-
     const renderHeader = (): JSX.Element => {
         if (props.artists.length === 0) return <Header artistName="" />;
         else
