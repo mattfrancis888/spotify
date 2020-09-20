@@ -27,6 +27,10 @@ beforeEach(async () => {
     });
 });
 
+test("Shows <ArtistInfo> at path /artist/:artistId - Using MemoryRouter", () => {
+    expect(app.getByTestId("artistContent")).toBeInTheDocument();
+});
+
 test("ComponentDidMount() fetches data and fills up Artist's banner and songs", async () => {
     const artistData = [
         {

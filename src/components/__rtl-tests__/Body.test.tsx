@@ -7,17 +7,30 @@ import { act } from "react-dom/test-utils";
 
 import nock from "nock";
 import waitForExpect from "wait-for-expect";
+import { MemoryRouter } from "react-router";
+import Routes from "components/Routes";
 
 afterEach(cleanup);
 let app: RenderResult;
 beforeEach(async () => {
     await act(async () => {
+        // app = render(
+        //     <Root>
+        //         <Body />
+        //     </Root>
+        // );
         app = render(
             <Root>
-                <Body />
+                <MemoryRouter initialEntries={["/"]} initialIndex={0}>
+                    <Routes />
+                </MemoryRouter>
             </Root>
         );
     });
+});
+
+test("Shows <Body> at path / - Using MemoryRouter ", () => {
+    expect(app.getByTestId("bodyContent")).toBeInTheDocument();
 });
 
 test("ComponentDidMount() fetches data and fills up DOM with Favorite Artists", async () => {
