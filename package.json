@@ -51,5 +51,9 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "devDependencies": {
+        "nock": "^13.0.4",
+        "wait-for-expect": "^3.0.2"
     }
 }

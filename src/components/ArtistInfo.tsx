@@ -44,10 +44,6 @@ const ArtistInfo: React.FC<ArtistInfoProps> = (props) => {
         props.fetchSongs(props.match.params.artistId);
     }, []);
 
-    useEffect(() => {
-        console.log(amountOfHearts);
-    }, [amountOfHearts]);
-
     const renderHeader = (): JSX.Element => {
         if (props.artists.length === 0) return <Header artistName="" />;
         else
@@ -91,9 +87,13 @@ const ArtistInfo: React.FC<ArtistInfoProps> = (props) => {
                     ></img>
                     <h1 className="artistFullName">{`${props.artists[0].firstName} ${props.artists[0].lastName}`}</h1>
                     <IconContext.Provider value={{ className: "heartsIcon" }}>
-                        <h1 className="heartsTitle">
+                        <h1
+                            className="heartsTitle"
+                            data-testid="amountOfHearts"
+                        >
                             {showHeartOutline ? (
                                 <AiOutlineHeart
+                                    data-testid="outlineHeartIcon"
                                     onClick={() => {
                                         setHeartImage(!showHeartOutline);
                                         setAmountOfHearts(
@@ -110,6 +110,7 @@ const ArtistInfo: React.FC<ArtistInfoProps> = (props) => {
                                 />
                             ) : (
                                 <AiFillHeart
+                                    data-testid="filledHeartIcon"
                                     onClick={() => {
                                         setHeartImage(!showHeartOutline);
                                         setAmountOfHearts(
@@ -162,7 +163,7 @@ const ArtistInfo: React.FC<ArtistInfoProps> = (props) => {
     return (
         <React.Fragment>
             {renderHeader()}
-            <div className="artistContainer">
+            <div data-testid="artistContent" className="artistContainer">
                 {renderBannerAndName()}
                 <div className="popularSongsContainer">
                     <h2 className="popularSongsTitle">Popular Songs</h2>

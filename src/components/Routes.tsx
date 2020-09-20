@@ -8,7 +8,6 @@ const Routes: React.FC<{}> = () => {
         <Switch>
             <Route path="/" exact component={Body} />
             <Route path="/artist/:artistId" exact component={ArtistInfo} />
-            <Route path="/test/:artistId" exact component={Header} />
         </Switch>
     );
 };

@@ -34,6 +34,7 @@ const Body: React.FC<BodyProps> = (props) => {
             return props.artists.map((artist) => {
                 return (
                     <CloudinaryContext
+                        data-testid="artist"
                         cloudName={cloudinaryCloudName}
                         key={artist._id.toString()}
                         className="artistCircle"
@@ -60,21 +61,17 @@ const Body: React.FC<BodyProps> = (props) => {
     };
 
     return (
-        <React.Fragment>
-            <div className="homeContainer">
-                <div className="titleWrap">
-                    <img
-                        className="spotifyLogo"
-                        src={spotify}
-                        alt="spotify logo"
-                    ></img>
-                    <h1 className="favoriteArtistTitle">'s Favorite Artists</h1>
-                </div>
-                <div className="favoriteArtistsContainer">
-                    {renderArtists()}
-                </div>
+        <div data-testid="bodyContent" className="homeContainer">
+            <div className="titleWrap">
+                <img
+                    className="spotifyLogo"
+                    src={spotify}
+                    alt="spotify logo"
+                ></img>
+                <h1 className="favoriteArtistTitle">'s Favorite Artists</h1>
             </div>
-        </React.Fragment>
+            <div className="favoriteArtistsContainer">{renderArtists()}</div>
+        </div>
     );
 };
 
