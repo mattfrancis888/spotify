@@ -13,20 +13,18 @@ import Routes from "components/Routes";
 afterEach(cleanup);
 let app: RenderResult;
 beforeEach(async () => {
-    await act(async () => {
-        // app = render(
-        //     <Root>
-        //         <Body />
-        //     </Root>
-        // );
-        app = render(
-            <Root>
-                <MemoryRouter initialEntries={["/"]} initialIndex={0}>
-                    <Routes />
-                </MemoryRouter>
-            </Root>
-        );
-    });
+    // app = render(
+    //     <Root>
+    //         <Body />
+    //     </Root>
+    // );
+    app = render(
+        <Root>
+            <MemoryRouter initialEntries={["/"]} initialIndex={0}>
+                <Routes />
+            </MemoryRouter>
+        </Root>
+    );
 });
 
 test("Shows <Body> at path / - Using MemoryRouter ", () => {
