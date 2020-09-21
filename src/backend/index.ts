@@ -1,5 +1,5 @@
 import express from "express";
-import { keys } from "./config/keys";
+import key from "./config/keys";
 import artistsRoutes from "./routes/artistsRoutes";
 import songsRoutes from "./routes/songsRoutes";
 const mongoose = require("mongoose");
@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 //Connect to database
-mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
+mongoose.connect(key.mongoURI, { useNewUrlParser: true });
 
 //Models
 require("./models/Artists");

@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
-var keys_1 = require("./config/keys");
+var keys_1 = __importDefault(require("./config/keys"));
 var artistsRoutes_1 = __importDefault(require("./routes/artistsRoutes"));
 var songsRoutes_1 = __importDefault(require("./routes/songsRoutes"));
 var mongoose = require("mongoose");
@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //CORS
 app.use(cors());
 //Connect to database
-mongoose.connect(keys_1.keys.mongoURI, { useNewUrlParser: true });
+mongoose.connect(keys_1.default.mongoURI, { useNewUrlParser: true });
 //Models
 require("./models/Artists");
 require("./models/Songs");
