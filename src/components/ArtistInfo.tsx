@@ -54,7 +54,9 @@ const ArtistInfo: React.FC<ArtistInfoProps> = (props) => {
             );
     };
     const renderBannerAndName = (): JSX.Element | JSX.Element[] => {
-        if (props.artists.length === 0)
+        if (props.artists.length !== 1)
+            //If it's not "1", it means that the "artists" store is empty or
+            // it's still filled with the list of artists (because user enters the home page/<Body>)
             return (
                 // <div className="loadingCenter">
                 //     <Loading />

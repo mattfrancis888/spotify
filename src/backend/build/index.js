@@ -4,22 +4,30 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
-var keys_1 = __importDefault(require("./config/keys"));
 var artistsRoutes_1 = __importDefault(require("./routes/artistsRoutes"));
 var songsRoutes_1 = __importDefault(require("./routes/songsRoutes"));
 var mongoose = require("mongoose");
-// const keys = require("./config/keys");
 var app = express_1.default();
-var cors = require("cors");
+//let cors = require("cors");
 var bodyParser = require("body-parser");
 //  middleware for parsing json objects - eg; able to acess req.body
 app.use(bodyParser.json());
 // middleware for parsing bodies from URL
 app.use(bodyParser.urlencoded({ extended: true }));
 //CORS
-app.use(cors());
+//app.use(cors());
+//Environment variables
+//https://www.twilio.com/blog/working-with-environment-variables-in-node-js-html
+if (process.env.NODE_ENV !== "production") {
+    //We don't need dotenv when in production
+    require("dotenv").config();
+}
+console.log("NODE_ENV", process.env.NODE_ENV);
 //Connect to database
-mongoose.connect(keys_1.default.mongoURI, { useNewUrlParser: true });
+mongoose.connect(process.env.mongoURI, { useNewUrlParser: true });
+////Regarding mongoURI;
+//Ideally we would have 2 keys; 1 key for our development database
+//the other 1 for production database
 //Models
 require("./models/Artists");
 require("./models/Songs");
@@ -29,15 +37,15 @@ app.use("/songs", songsRoutes_1.default);
 //require("./routes/artistsRoutes")(app);
 // require("./routes/songsRoutes")(app);
 var PORT = process.env.PORT || 5000;
-//TODO: FIX LATER - SERVING UP EXPRES STATIC
 //Production
-// const path = require("path");
-// app.use(express.static(__dirname)); //here is important thing - no static directory, because all static :)
-// app.get("/*", function (req, res) {
-//     res.sendFile(path.join(__dirname, "index.html"));
-// });
-// if (process.env.NODE_ENV === "production") {
-//     console.log("I'M IN PRODUCTION");
+var path = require("path");
+if (process.env.NODE_ENV === "production") {
+    console.log("I'M IN PRODUCTION");
+}
+app.use(express_1.default.static(path.join(__dirname, "../../../build")));
+app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "../../../build"));
+});
 //     // Express will serve up production assets
 //     // like our main.js file, or main.css file!
 //     app.use(express.static("client/build"));

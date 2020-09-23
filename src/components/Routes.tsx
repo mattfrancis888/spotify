@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Body from "./Body";
 import ArtistInfo from "./ArtistInfo";
-import Header from "./Header";
+
 const Routes: React.FC<{}> = () => {
     return (
         <Switch>
