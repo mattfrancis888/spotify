@@ -1,5 +1,6 @@
 import { ActionTypes } from "./types";
-import artists from "./axiosConfig";
+import onlineAPI from "./axiosConfig";
+
 import axios from "axios";
 import { Dispatch } from "redux";
 
@@ -19,7 +20,7 @@ export interface SongsAction {
 }
 
 export const fetchSongs = (artistId: string) => async (dispatch: Dispatch) => {
-    const response = await artists.get<ArtistSongs[]>(`/songs/${artistId}`);
+    const response = await onlineAPI.get<ArtistSongs[]>(`/songs/${artistId}`);
     dispatch<SongsAction>({
         type: ActionTypes.FETCH_SONGS,
         payload: response.data,

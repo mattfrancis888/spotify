@@ -8,14 +8,15 @@ var artistsRoutes_1 = __importDefault(require("./routes/artistsRoutes"));
 var songsRoutes_1 = __importDefault(require("./routes/songsRoutes"));
 var mongoose = require("mongoose");
 var app = express_1.default();
-//let cors = require("cors");
+var cors = require("cors");
 var bodyParser = require("body-parser");
 //  middleware for parsing json objects - eg; able to acess req.body
 app.use(bodyParser.json());
 // middleware for parsing bodies from URL
 app.use(bodyParser.urlencoded({ extended: true }));
 //CORS
-//app.use(cors());
+//Needed for PATCH requests in now.json
+app.use(cors());
 //Environment variables
 //https://www.twilio.com/blog/working-with-environment-variables-in-node-js-html
 if (process.env.NODE_ENV !== "production") {
@@ -38,14 +39,15 @@ app.use("/songs", songsRoutes_1.default);
 // require("./routes/songsRoutes")(app);
 var PORT = process.env.PORT || 5000;
 //Production
-var path = require("path");
-if (process.env.NODE_ENV === "production") {
-    console.log("I'M IN PRODUCTION");
-}
-app.use(express_1.default.static(path.join(__dirname, "../../../build")));
-app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "../../../build"));
-});
+// const path = require("path");
+// if (process.env.NODE_ENV === "production") {
+//     console.log("I'M IN PRODUCTION");
+//Used to send JS files after npm run build generates the static files; another way of deploying app
+//     app.use(express.static(path.join(__dirname, "../../../build")));
+//     app.get("*", function (req, res) {
+//         res.sendFile(path.join(__dirname, "../../../build"));
+//     });
+// }
 //     // Express will serve up production assets
 //     // like our main.js file, or main.css file!
 //     app.use(express.static("client/build"));

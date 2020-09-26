@@ -10,7 +10,7 @@ import {
 } from "../actions";
 import { StoreState } from "../reducers";
 import Loading from "./Loading";
-import { cloudinaryCloudName } from "../keys";
+import { CLOUDINARY_CLOUD_NAME } from "../keys";
 import { Image, CloudinaryContext } from "cloudinary-react";
 import { RouteComponentProps } from "react-router-dom";
 import Header from "./Header";
@@ -148,7 +148,7 @@ const ArtistInfo: React.FC<ArtistInfoProps> = (props) => {
             return props.artistSongs[0].songs.map((song, index) => {
                 return (
                     <CloudinaryContext
-                        cloudName={cloudinaryCloudName}
+                        cloudName={CLOUDINARY_CLOUD_NAME}
                         key={index}
                         className="song"
                     >

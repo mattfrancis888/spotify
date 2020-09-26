@@ -4,7 +4,7 @@ import { Image, CloudinaryContext } from "cloudinary-react";
 import { connect } from "react-redux";
 import { Artist, fetchArtists } from "../actions";
 import { StoreState } from "../reducers";
-import { cloudinaryCloudName } from "../keys";
+import { CLOUDINARY_CLOUD_NAME } from "../keys";
 import Loading from "./Loading";
 import { useHistory } from "react-router-dom";
 import CirclePlaceholder from "./CirclePlaceholder";
@@ -35,7 +35,7 @@ const Body: React.FC<BodyProps> = (props) => {
                 return (
                     <CloudinaryContext
                         data-testid="artist"
-                        cloudName={cloudinaryCloudName}
+                        cloudName={CLOUDINARY_CLOUD_NAME}
                         key={artist._id.toString()}
                         className="artistCircle"
                         onClick={() =>

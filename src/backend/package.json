@@ -2,12 +2,13 @@
     "name": "backend",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "build/index.js",
     "scripts": {
         "tsc": "tsc",
-        "start:build": "tsc -w",
-        "start:run": "nodemon build/index.js",
-        "start": "concurrently npm:start:*",
+        "convert:build": "tsc -w",
+        "convert:run": "nodemon build/index.js",
+        "convert": "concurrently npm:convert:*",
+        "start": " node build/index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Matthew Francis",
