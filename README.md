@@ -1,44 +1,76 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Spotify
 
-## Available Scripts
+Shows artists and their top songs from Spotify. Data is stored on MongoDB. Developed with React, Redux, Express, Typescript, Mongoose, Jest, React-Testing-Library, JS, HTML, CSS.
+Deployed front-end and back-end seperatley.
 
-In the project directory, you can run:
+# Why I Built It And What I've Learned:
 
-### `npm start`
+-   To understand how to build and deploy a full-stack application.
+-   Pros and cons of NoSQL vs SQL.
+-   How to use Mongoose to model MongoDB data so that the back-end and the front-end can be integrated together.
+-   How to use Typescript with Express and Mongoose.
+-   Difference between CORS and proxy.
+-   Hiding sensitive keys/information that's used in development from production code.
+-   Environmental variables that are used in development and production.
+-   Different ways of deploying front-end and back-end.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## NoSQL vs SQL:
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### NoSQL:
 
-### `npm test`
+-   Non-relational database. Useful when data isn't heavily interconnected with other data.
+-   Database model is simple to create and understand.
+-   Schema can be dynamic, thus the data inserted can be different from each other. Schema is flexible.
+-   Scaling is easier with "Horizontal Scaling", where we can add more servers to increase storage.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### SQL:
 
-### `npm run build`
+-   Relational database. Useful when data is heavily interconnected with other data.
+-   Database model is challenging to create due to its complex nature (eg; primary and foreign keys).
+-   Schema is rigid. Every data inserted must be similar.
+-   Scaling is usually done with "Vertical Scaling", where we can improve the server capacity by upgrading or adding resources (eg; CPU/RAM/etc) to the server. This poses a problem when the data grows larger because the server cannot be upgraded infinitely.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Development vs Production:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+-   Have 2 databases. 1 database for developement purposes and 1 for production.
+-   Sensitive information such as a database or API key should not be committed to the repo. Store the info locally with a .env file and .gitignore the file. Store the info online by creating an environmental variable in your hosting site.
+-   A proxy is used when you don't want other sources/networks accessing the API except yourself.
+-   We can deploy the front-end and back-end together with a proxy. Ensure that Express serve the Javascript files after building the React application via `npm run build`.
+-   We can deploy the front-end and back-end separately. In this project, our hosting site (Vercel) needs CORS (Cross-origin resource sharing) enabled for the API to be accessed. Thus, other sources could use the API; which isn't ideal for the API's security/privacy.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## React-Testing-Library:
 
-### `npm run eject`
+-   Nock is used to intercept HTTP requests made from the API. It does not intercept calls made by the proxy. Must get rid of "proxy" in package.json and restart the app/terminal for tests to work.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## External resources:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+-   Postman to test API requests.
+-   Prettier to format code and EsLint for linting.
+-   Redux dev tool google chrome extension to check the values of the states.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## What It Looks Like
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<img src="readmeImg/homepage.png" height="350"/>
+<img src="readmeImg/martinArtist.jpg" height="350"/>
+<img src="readmeImg/taylorArtist.png" height="350"/>
+<img src="readmeImg/loading.gif" height="350"/>
 
-## Learn More
+# Getting Started
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Clone the project. Use `npm install` to install all the dependencies. Run the project with `npm start` for development or `npm run build` for production.
+
+2. OPTIONAL: If you want to make changes locally, on the terminal, go to the `backend` directory. Type `npm run convert` to start the local server. The command would also listen to changes and convert the Express Typescript files to Express Javascript files that will be used for produciton.
+
+# Prerequisites
+
+What things you need to install the software
+
+```
+- Any package manager (npm, yarn)
+```
+
+# Versioning
+
+None

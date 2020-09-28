@@ -1,0 +1,89 @@
+.artistContainer {
+    height: 100%;
+    min-height: 100vh;
+    background-color: #121212;
+    color: white;
+    overflow-x: hidden;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), #121212);
+}
+
+.bannerContainer {
+    position: relative;
+    width: 100%;
+    min-width: 37rem;
+    height: 30rem;
+    margin-bottom: 2rem;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 0.5s;
+    }
+    .artistFullName {
+        position: absolute;
+        left: 2rem;
+        bottom: 3.5rem;
+        font-size: 5rem;
+        font-weight: 900;
+        letter-spacing: -0.2rem;
+        margin: 0;
+        @media screen and (min-width: $md_breakpoint) {
+            font-size: 7.5rem;
+        }
+
+        @media screen and (min-width: $lg_breakpoint) {
+            font-size: 9.5rem;
+        }
+    }
+
+    .heartsIcon {
+        cursor: pointer;
+        margin-right: 0.8rem;
+    }
+    .heartsTitle {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        right: 6rem;
+        bottom: -1rem;
+        font-size: 2.5rem;
+    }
+}
+
+.popularSongsContainer {
+    padding: 3rem 5rem;
+}
+
+.popularSongsTitle {
+    font-size: 2.8rem;
+    font-weight: 600;
+    margin: 2rem 0;
+    margin-bottom: 3rem;
+    color: white;
+}
+.songsListWrap {
+    display: flex;
+    flex-direction: column;
+}
+
+.song {
+    display: flex;
+    align-items: center;
+    h1 {
+        font-size: 1.6rem;
+        font-weight: 600;
+        letter-spacing: 0.015rsem;
+    }
+    margin: 1rem 0;
+}
+
+.songImageContainer {
+    height: 7rem;
+    width: 7rem;
+    margin-right: 1.4rem;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
