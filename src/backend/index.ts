@@ -14,6 +14,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //CORS
 //Needed for PATCH requests in now.json
+//Use proxy if we are deploying front-end and backend together
+//No need for CORS
 app.use(cors());
 //Environment variables
 //https://www.twilio.com/blog/working-with-environment-variables-in-node-js-html

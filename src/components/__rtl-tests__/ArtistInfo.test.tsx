@@ -15,6 +15,9 @@ import Routes from "components/Routes";
 import { updateHearts } from "actions";
 afterEach(cleanup);
 let app: RenderResult;
+//Make sure to delete proxy line in package.json and restart the app
+//before testig.
+//Nock will fail when porxy is active.
 beforeEach(() => {
     //If we straight up import <ArtistInfo/>, test would not be able to read props.match.params; which menas
     //that we can't use the URL parameter in our tests
