@@ -1,11 +1,13 @@
 import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
 import artistsRoutes from "./routes/artistsRoutes";
 import songsRoutes from "./routes/songsRoutes";
-const mongoose = require("mongoose");
+import bodyParser from "body-parser";
+
 const app = express();
 
-let cors = require("cors");
-const bodyParser = require("body-parser");
 //  middleware for parsing json objects - eg; able to acess req.body
 app.use(bodyParser.json());
 
@@ -21,11 +23,13 @@ app.use(cors());
 //https://www.twilio.com/blog/working-with-environment-variables-in-node-js-html
 if (process.env.NODE_ENV !== "production") {
     //We don't need dotenv when in production
-    require("dotenv").config();
+    dotenv.config();
 }
 console.log("NODE_ENV", process.env.NODE_ENV);
 //Connect to database
-mongoose.connect(process.env.mongoURI, { useNewUrlParser: true });
+if (process.env.mongoURI) {
+    mongoose.connect(process.env.mongoURI, { useNewUrlParser: true });
+}
 ////Regarding mongoURI;
 //Ideally we would have 2 keys; 1 key for our development database
 //the other 1 for production database
