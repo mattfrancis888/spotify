@@ -7,13 +7,6 @@ import songsRoutes from "./routes/songsRoutes";
 import bodyParser from "body-parser";
 
 const app = express();
-
-//  middleware for parsing json objects - eg; able to acess req.body
-app.use(bodyParser.json());
-
-// middleware for parsing bodies from URL
-app.use(bodyParser.urlencoded({ extended: true }));
-
 //CORS
 //Needed for PATCH requests in now.json
 //Use proxy if we are deploying front-end and backend together
@@ -25,10 +18,18 @@ if (process.env.NODE_ENV !== "production") {
     //We don't need dotenv when in production
     dotenv.config();
 }
+
+//  middleware for parsing json objects - eg; able to acess req.body
+app.use(bodyParser.json());
+// middleware for parsing bodies from URL
+app.use(bodyParser.urlencoded({ extended: true }));
 console.log("NODE_ENV", process.env.NODE_ENV);
 //Connect to database
 if (process.env.mongoURI) {
-    mongoose.connect(process.env.mongoURI, { useNewUrlParser: true });
+    mongoose.connect(process.env.mongoURI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    });
 }
 ////Regarding mongoURI;
 //Ideally we would have 2 keys; 1 key for our development database

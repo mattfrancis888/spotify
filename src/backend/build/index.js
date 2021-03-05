@@ -4,30 +4,36 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
+var cors_1 = __importDefault(require("cors"));
+var dotenv_1 = __importDefault(require("dotenv"));
+var mongoose_1 = __importDefault(require("mongoose"));
 var artistsRoutes_1 = __importDefault(require("./routes/artistsRoutes"));
 var songsRoutes_1 = __importDefault(require("./routes/songsRoutes"));
-var mongoose = require("mongoose");
+var body_parser_1 = __importDefault(require("body-parser"));
 var app = express_1.default();
-var cors = require("cors");
-var bodyParser = require("body-parser");
-//  middleware for parsing json objects - eg; able to acess req.body
-app.use(bodyParser.json());
-// middleware for parsing bodies from URL
-app.use(bodyParser.urlencoded({ extended: true }));
 //CORS
 //Needed for PATCH requests in now.json
 //Use proxy if we are deploying front-end and backend together
 //No need for CORS
-app.use(cors());
+app.use(cors_1.default());
 //Environment variables
 //https://www.twilio.com/blog/working-with-environment-variables-in-node-js-html
 if (process.env.NODE_ENV !== "production") {
     //We don't need dotenv when in production
-    require("dotenv").config();
+    dotenv_1.default.config();
 }
+//  middleware for parsing json objects - eg; able to acess req.body
+app.use(body_parser_1.default.json());
+// middleware for parsing bodies from URL
+app.use(body_parser_1.default.urlencoded({ extended: true }));
 console.log("NODE_ENV", process.env.NODE_ENV);
 //Connect to database
-mongoose.connect(process.env.mongoURI, { useNewUrlParser: true });
+if (process.env.mongoURI) {
+    mongoose_1.default.connect(process.env.mongoURI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    });
+}
 ////Regarding mongoURI;
 //Ideally we would have 2 keys; 1 key for our development database
 //the other 1 for production database
